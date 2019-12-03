@@ -43,3 +43,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
+
+//Hello, and welcome to Blackjack, one player edition! The rules are simple.
+//There are two players, one of which is the dealer AI. The other player is you! The goal
+//is to win through getting a count as close as possible to 21, without going over 21.
+//Suits don't affect the value of a card. Cards are worth the following: number cards
+//have the same value as their numbers. Jacks are worth 11. Queens are worth 12.
+//Kings are worth 13. Aces are worth either 1 or 11 by the player's choice. Each win
+//amounts to one point. The exception is a natural blackjack, where your opening hand
+//amounts to 21, and the dealer does not have a natural blackjack. In this case, you get
+//double the amount of points. Finally, there is hitting and standing. You may choose to
+//hit or stand so long as your cards add up to less than 21. When you hit, you draw a card.
+//When you stand, you choose to hold your cards and reveal your cards, the dealer does the same.
+//Think of standing like a duel button. At the end of the round, you may choose to either
+//quit the app, or start another round. Good luck, have fun!
