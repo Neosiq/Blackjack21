@@ -11,6 +11,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_start:
                     Fragment fragment = null;
-                    fragment = new GameFragment();
+                    fragment = new StartFragment();
                     FragmentManager fm = getSupportFragmentManager();
                     if(fragment != null){
                         fm.beginTransaction().replace(R.id.container, fragment).commit();
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new GameFragment();
                     FragmentManager fmg = getSupportFragmentManager();
                     if(fragment != null){
+                        Log.d("MainActivity", "onNavigationItemSelected: game");
                         fmg.beginTransaction().replace(R.id.container, fragment).commit();
                      }
                     return true;
