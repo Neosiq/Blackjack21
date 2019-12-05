@@ -1,8 +1,10 @@
 package com.example.blackjack21;
 
+import androidx.fragment.app.Fragment;
+
 import com.example.blackjack21.R;
 
-public class ScoreFragment {
+public class ScoreFragment extends Fragment {
 
     private String score;
 

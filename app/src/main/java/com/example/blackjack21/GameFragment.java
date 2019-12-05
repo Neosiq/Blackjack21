@@ -1,5 +1,7 @@
 package com.example.blackjack21;
 
-public class GameFragment {
+import androidx.fragment.app.Fragment;
+
+public class GameFragment extends Fragment {
 
 }

@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_game:
                     mTextMessage.setText(R.string.title_game);
+                    Fragment fragment = null;
+                    fragment = new GameFragment();
                     return true;
                 case R.id.navigation_scoreboard:
                     mTextMessage.setText(R.string.title_scoreboard);
@@ -46,28 +48,28 @@ public class MainActivity extends AppCompatActivity {
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        Fragment fragment = null;
-        fragment = new PythagoreanFragment();
-        if (id == R.id.nav_home) {
-
-        }
-
-        FragmentManager fm = getSupportFragmentManager();
-        if(fragment != null){
-            fm.beginTransaction().replace(R.id.constraintlayout_main_container, fragment).commit();
-        }
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-
-
-    }
+//    @Override
+//    public boolean onNavigationItemSelected(MenuItem item) {
+//        // Handle navigation view item clicks here.
+//        int id = item.getItemId();
+//
+//        Fragment fragment = null;
+//        fragment = new PythagoreanFragment();
+//        if (id == R.id.nav_home) {
+//
+//        }
+//
+//        FragmentManager fm = getSupportFragmentManager();
+//        if(fragment != null){
+//            fm.beginTransaction().replace(R.id.constraintlayout_main_container, fragment).commit();
+//        }
+//
+//        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+//        drawer.closeDrawer(GravityCompat.START);
+//        return true;
+//
+//
+//    }
 
 }
 
