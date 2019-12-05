@@ -30,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
                     mTextMessage.setText(R.string.title_game);
                     Fragment fragment = null;
                     fragment = new GameFragment();
+                    FragmentManager fm = getSupportFragmentManager();
+                    if(fragment != null){
+                        fm.beginTransaction().replace(R.id.container, fragment).commit();
+                     }
                     return true;
                 case R.id.navigation_scoreboard:
                     mTextMessage.setText(R.string.title_scoreboard);
@@ -59,13 +63,7 @@ public class MainActivity extends AppCompatActivity {
 //
 //        }
 //
-//        FragmentManager fm = getSupportFragmentManager();
-//        if(fragment != null){
-//            fm.beginTransaction().replace(R.id.constraintlayout_main_container, fragment).commit();
-//        }
 //
-//        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-//        drawer.closeDrawer(GravityCompat.START);
 //        return true;
 //
 //
