@@ -60,7 +60,27 @@ public class GameFragment extends Fragment {
         stand = rootView.findViewById(R.id.game_fragment_stand);
     }
 
-
-
+    private boolean checkWin(int dealer, int player) {
+        boolean status = false;
+        if (player > 21 && dealer < 21){
+            status = false;
+        }
+        else if (dealer > 21 && player < 21) {
+            status = true;
+        }
+        else if (dealer == 21 && player != 21) {
+            status = false;
+        }
+        else if (player == 21 && dealer != 21) {
+            status = true;
+        }
+        else if (21 - player < 21 - dealer) {
+            status = true;
+        }
+        else if (21 - player < 21 - dealer) {
+            status = false;
+        }
+        return status;
+    }
 
 }
