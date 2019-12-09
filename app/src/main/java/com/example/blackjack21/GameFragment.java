@@ -1,5 +1,6 @@
 package com.example.blackjack21;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,8 +78,8 @@ public class GameFragment extends Fragment {
         stand = rootView.findViewById(R.id.game_fragment_stand);
     }
 
-    private boolean checkWin(int dealer, int player) {
-        boolean status = false;
+    private int checkWin(int dealer, int player) {
+        int status = false;
         if (player > 21 && dealer < 21){
             status = false;
         }
@@ -97,6 +98,11 @@ public class GameFragment extends Fragment {
         else if (21 - player < 21 - dealer) {
             status = false;
         }
+
+        Intent targetIntent =
+                new Intent (GameFragment.this, ScoreFragment.class);
+        targetIntent.putExtra(POINTS, status);
+        startActivity(targetIntent);
         return status;
     }
 

@@ -29,6 +29,10 @@ public class ScoreFragment extends Fragment {
         return rootView;
     }
 
+    private void winCalculation(boolean status){
+        String username = lastIntent.getStringExtra(MainActivity.EXTRA_USERNAME);
+    }
+
     private void wireWidgets (View rootView) {
         score = rootView.findViewById(R.id.game_fragment_textview);
     }
