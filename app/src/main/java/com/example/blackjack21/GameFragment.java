@@ -41,9 +41,26 @@ public class GameFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_game, container, false);
         wireWidgets(rootView);
+        gameStart();
         return rootView;
     }
 
+    private void gameStart() {
+        int dealer1 = (int) (Math.random()*13 + 1);
+        int dealer2 = (int) (Math.random()*13 + 1);
+        int player1 = (int) (Math.random()*13 + 1);
+        int player2 = (int) (Math.random()*13 + 1);
+        setCard(pcard1, player1);
+        setCard(pcard2, player2);
+
+    }
+
+    private void hit() {
+
+    }
+    private void stand() {
+
+    }
 
     private void wireWidgets (View rootView) {
         dealer = rootView.findViewById(R.id.game_fragment_dealer_textview);
@@ -82,5 +99,35 @@ public class GameFragment extends Fragment {
         }
         return status;
     }
+
+    private void setCard(ImageView card, int value) {
+        if (value == 1)
+        card.setImageResource(R.drawable.spadeace);
+        if (value == 2)
+            card.setImageResource(R.drawable.spade2);
+        if (value == 3)
+            card.setImageResource(R.drawable.spade3);
+        if (value == 4)
+            card.setImageResource(R.drawable.spade4);
+        if (value == 5)
+            card.setImageResource(R.drawable.spade5);
+        if (value == 6)
+            card.setImageResource(R.drawable.spade6);
+        if (value == 7)
+            card.setImageResource(R.drawable.spade7);
+        if (value == 8)
+            card.setImageResource(R.drawable.spade8);
+        if (value == 9)
+            card.setImageResource(R.drawable.spade9);
+        if (value == 10)
+            card.setImageResource(R.drawable.spade10);
+        if (value == 11)
+            card.setImageResource(R.drawable.spadejack);
+        if (value == 12)
+            card.setImageResource(R.drawable.spadequeen);
+        if (value == 13)
+            card.setImageResource(R.drawable.spadeking);
+    }
+
 
 }
