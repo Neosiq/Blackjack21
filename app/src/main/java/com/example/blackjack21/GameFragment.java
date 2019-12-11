@@ -149,6 +149,8 @@ public class GameFragment extends Fragment {
         stand = rootView.findViewById(R.id.game_fragment_stand);
     }
 
+
+    //checks for all card conditions: 21, busting (more than 21), and having less than the opponent
     private int standCheck(int dealer, int player) {
         int status = 0; //0 = game continues, -1 = dealer win, 1 = player win
         if (player > 21 && dealer < 21){
@@ -169,9 +171,13 @@ public class GameFragment extends Fragment {
         else if (21 - player < 21 - dealer) {
             status = -1;
         }
+        else if (player == 21 && dealer == 21){
+            status = 0;
+        }
         return status;
     }
 
+    //checks only for busts and 21s
     private int hitCheck(int dealer, int player) {
         int status = 0; //0 = game continues, -1 = dealer win, 1 = player win
         if (player > 21 && dealer < 21){
