@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import static android.widget.Toast.LENGTH_SHORT;
+import static android.widget.Toast.LENGTH_LONG;
 
 public class GameFragment extends Fragment {
 
@@ -70,6 +70,16 @@ public class GameFragment extends Fragment {
         int player2 = (int) (Math.random()*13 + 1);
         playerSum = player1 + player2;
         dealerSum = dealer1 + dealer2;
+        if (hitCheck(dealerSum, playerSum) == -1 ) {
+            Toast.makeText(GameFragment.this.getContext(), "You have lost, 0 points earned", LENGTH_LONG ).show();
+            setCard(dcard1, dealer1);
+            setCard(dcard2, dealer2);
+        }
+        if (hitCheck(dealerSum, playerSum) == 1) {
+            Toast.makeText(GameFragment.this.getContext(), "You have won, 1 point earned", LENGTH_LONG ).show();
+            setCard(dcard1, dealer1);
+            setCard(dcard2, dealer2);
+        }
         setCard(pcard1, player1);
         setCard(pcard2, player2);
     }
@@ -88,20 +98,26 @@ public class GameFragment extends Fragment {
                    dealerSum += dealer3;
                    dcard3.setVisibility(View.VISIBLE);
                    if (hitCheck(dealerSum, playerSum) == -1 ) {
-                       Toast.makeText(GameFragment.this.getContext(), "You have lost", LENGTH_SHORT ).show();
+                       Toast.makeText(GameFragment.this.getContext(), "You have lost, 0 points earned", LENGTH_LONG ).show();
                        setCard(dcard1, dealer1);
                        setCard(dcard2, dealer2);
                        setCard(dcard3, dealer3);
                    }
                    if (hitCheck(dealerSum, playerSum) == 1) {
-                       Toast.makeText(GameFragment.this.getContext(), "You have won", LENGTH_SHORT ).show();
+                       Toast.makeText(GameFragment.this.getContext(), "You have won, 1 point earned", LENGTH_LONG ).show();
+                       setCard(dcard1, dealer1);
+                       setCard(dcard2, dealer2);
+                       setCard(dcard3, dealer3);
+                   }
+                   if (hitCheck(dealerSum, playerSum) == 2) {
+                       Toast.makeText(GameFragment.this.getContext(), "It's a tie, 0 points earned", LENGTH_LONG ).show();
                        setCard(dcard1, dealer1);
                        setCard(dcard2, dealer2);
                        setCard(dcard3, dealer3);
                    }
 
                }
-               else {
+               else if (hitTime == 1){
                    int player4 = (int) (Math.random() * 13 + 1);
                    playerSum += player4;
                    setCard(pcard4, player4);
@@ -109,19 +125,27 @@ public class GameFragment extends Fragment {
                    int dealer4 = (int) (Math.random() * 13 + 1);
                    dealerSum += dealer4;
                    hitCheck(dealerSum, playerSum);
+                   dcard4.setVisibility(View.VISIBLE);
                    if (standCheck(dealerSum, playerSum) == -1 ) {
-                       Toast.makeText(GameFragment.this.getContext(), "You have lost", LENGTH_SHORT ).show();
+                       Toast.makeText(GameFragment.this.getContext(), "You have lost, 0 points earned", LENGTH_LONG ).show();
                        setCard(dcard1, dealer1);
                        setCard(dcard2, dealer2);
                        setCard(dcard3, dealer3);
-                       setCard(dcard3, dealer3);
+                       setCard(dcard4, dealer4);
                    }
                    if (standCheck(dealerSum, playerSum) == 1) {
-                       Toast.makeText(GameFragment.this.getContext(), "You have won", LENGTH_SHORT ).show();
+                       Toast.makeText(GameFragment.this.getContext(), "You have won, 1 point earned", LENGTH_LONG ).show();
                        setCard(dcard1, dealer1);
                        setCard(dcard2, dealer2);
                        setCard(dcard3, dealer3);
+                       setCard(dcard4, dealer4);
+                   }
+                   if (standCheck(dealerSum, playerSum) == 0) {
+                       Toast.makeText(GameFragment.this.getContext(), "It's a tie, 0 points earned", LENGTH_LONG ).show();
+                       setCard(dcard1, dealer1);
+                       setCard(dcard2, dealer2);
                        setCard(dcard3, dealer3);
+                       setCard(dcard4, dealer4);
                    }
                }
             }
@@ -129,7 +153,24 @@ public class GameFragment extends Fragment {
         stand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (standCheck(dealerSum, playerSum) == -1 ) {
+                    Toast.makeText(GameFragment.this.getContext(), "You have lost, 0 points earned", LENGTH_LONG ).show();
+                    setCard(dcard1, dealer1);
+                    setCard(dcard2, dealer2);
+                    setCard(dcard3, dealer3);
+                }
+                if (standCheck(dealerSum, playerSum) == 1) {
+                    Toast.makeText(GameFragment.this.getContext(), "You have won, 1 point earned", LENGTH_LONG ).show();
+                    setCard(dcard1, dealer1);
+                    setCard(dcard2, dealer2);
+                    setCard(dcard3, dealer3);
+                }
+                if (standCheck(dealerSum, playerSum) == 0) {
+                    Toast.makeText(GameFragment.this.getContext(), "It's a tie, 0 points earned", LENGTH_LONG ).show();
+                    setCard(dcard1, dealer1);
+                    setCard(dcard2, dealer2);
+                    setCard(dcard3, dealer3);
+                }
             }
         });
     }
