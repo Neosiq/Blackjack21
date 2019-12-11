@@ -80,6 +80,11 @@ public class GameFragment extends Fragment {
             setCard(dcard1, dealer1);
             setCard(dcard2, dealer2);
         }
+        if (hitCheck(dealerSum, playerSum) == 2) {
+            Toast.makeText(GameFragment.this.getContext(), "It's a tie, 0 points earned", LENGTH_LONG ).show();
+            setCard(dcard1, dealer1);
+            setCard(dcard2, dealer2);
+        }
         setCard(pcard1, player1);
         setCard(pcard2, player2);
     }
@@ -209,7 +214,7 @@ public class GameFragment extends Fragment {
         else if (21 - player < 21 - dealer) {
             status = 1;
         }
-        else if (21 - player < 21 - dealer) {
+        else if (21 - player > 21 - dealer) {
             status = -1;
         }
         else if (player > 21 && dealer > 21){
