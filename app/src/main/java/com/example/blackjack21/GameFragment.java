@@ -31,6 +31,7 @@ public class GameFragment extends Fragment {
     // buttons: hit and stand
     private Button hit;
     private Button stand;
+    public static final String POINTS = "points";
 
 
 
@@ -79,30 +80,25 @@ public class GameFragment extends Fragment {
     }
 
     private int checkWin(int dealer, int player) {
-        int status = false;
+        int status = 0; //0 = game continues, -1 = dealer win, 1 = player win
         if (player > 21 && dealer < 21){
-            status = false;
+            status = -1;
         }
         else if (dealer > 21 && player < 21) {
-            status = true;
+            status = 1;
         }
         else if (dealer == 21 && player != 21) {
-            status = false;
+            status = -1;
         }
         else if (player == 21 && dealer != 21) {
-            status = true;
+            status = 1;
         }
         else if (21 - player < 21 - dealer) {
-            status = true;
+            status = 1;
         }
         else if (21 - player < 21 - dealer) {
-            status = false;
+            status = -1;
         }
-
-        Intent targetIntent =
-                new Intent (GameFragment.this, ScoreFragment.class);
-        targetIntent.putExtra(POINTS, status);
-        startActivity(targetIntent);
         return status;
     }
 

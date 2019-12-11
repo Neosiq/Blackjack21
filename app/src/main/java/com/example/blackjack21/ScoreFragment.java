@@ -30,7 +30,6 @@ public class ScoreFragment extends Fragment {
     }
 
     private void winCalculation(boolean status){
-        String username = lastIntent.getStringExtra(MainActivity.EXTRA_USERNAME);
     }
 
     private void wireWidgets (View rootView) {
