@@ -38,6 +38,9 @@ public class GameFragment extends Fragment {
     private int playerSum;
     private int dealerSum;
     private int hitTime;
+    private int dealer1;
+    private int dealer2;
+    private int dealer3;
     public static final String POINTS = "points";
     public static final int BACK = 14;
 
@@ -61,8 +64,8 @@ public class GameFragment extends Fragment {
         playerSum = 0;
         dealerSum = 0;
         hitTime = 0;
-        int dealer1 = (int) (Math.random()*13 + 1);
-        int dealer2 = (int) (Math.random()*13 + 1);
+        dealer1 = (int) (Math.random()*13 + 1);
+        dealer2 = (int) (Math.random()*13 + 1);
         int player1 = (int) (Math.random()*13 + 1);
         int player2 = (int) (Math.random()*13 + 1);
         playerSum = player1 + player2;
@@ -81,17 +84,20 @@ public class GameFragment extends Fragment {
                    playerSum += player3;
                    setCard(pcard3, player3);
                    pcard3.setVisibility(View.VISIBLE);
-                   int dealer3 = (int) (Math.random() * 13 + 1);
+                   dealer3 = (int) (Math.random() * 13 + 1);
                    dealerSum += dealer3;
-                   setCard(dcard3, dealer3);
-
+                   dcard3.setVisibility(View.VISIBLE);
                    if (hitCheck(dealerSum, playerSum) == -1 ) {
                        Toast.makeText(GameFragment.this.getContext(), "You have lost", LENGTH_SHORT ).show();
-                       dcard3.setVisibility(View.VISIBLE);
+                       setCard(dcard1, dealer1);
+                       setCard(dcard2, dealer2);
+                       setCard(dcard3, dealer3);
                    }
                    if (hitCheck(dealerSum, playerSum) == 1) {
                        Toast.makeText(GameFragment.this.getContext(), "You have won", LENGTH_SHORT ).show();
-                       dcard3.setVisibility(View.VISIBLE);
+                       setCard(dcard1, dealer1);
+                       setCard(dcard2, dealer2);
+                       setCard(dcard3, dealer3);
                    }
 
                }
@@ -102,17 +108,20 @@ public class GameFragment extends Fragment {
                    pcard4.setVisibility(View.VISIBLE);
                    int dealer4 = (int) (Math.random() * 13 + 1);
                    dealerSum += dealer4;
-                   setCard(dcard4, dealer4);
                    hitCheck(dealerSum, playerSum);
-                   if (hitCheck(dealerSum, playerSum) == -1 ) {
+                   if (standCheck(dealerSum, playerSum) == -1 ) {
                        Toast.makeText(GameFragment.this.getContext(), "You have lost", LENGTH_SHORT ).show();
-                       dcard3.setVisibility(View.VISIBLE);
-                       dcard4.setVisibility(View.VISIBLE);
+                       setCard(dcard1, dealer1);
+                       setCard(dcard2, dealer2);
+                       setCard(dcard3, dealer3);
+                       setCard(dcard3, dealer3);
                    }
-                   if (hitCheck(dealerSum, playerSum) == 1) {
+                   if (standCheck(dealerSum, playerSum) == 1) {
                        Toast.makeText(GameFragment.this.getContext(), "You have won", LENGTH_SHORT ).show();
-                       dcard3.setVisibility(View.VISIBLE);
-                       dcard4.setVisibility(View.VISIBLE);
+                       setCard(dcard1, dealer1);
+                       setCard(dcard2, dealer2);
+                       setCard(dcard3, dealer3);
+                       setCard(dcard3, dealer3);
                    }
                }
             }
