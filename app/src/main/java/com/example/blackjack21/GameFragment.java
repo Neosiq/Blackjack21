@@ -171,7 +171,10 @@ public class GameFragment extends Fragment {
         else if (21 - player < 21 - dealer) {
             status = -1;
         }
-        else if (player == 21 && dealer == 21){
+        else if (player > 21 && dealer > 21){
+            status = 0;
+        }
+        else if (player == dealer){
             status = 0;
         }
         return status;
@@ -179,8 +182,14 @@ public class GameFragment extends Fragment {
 
     //checks only for busts and 21s
     private int hitCheck(int dealer, int player) {
-        int status = 0; //0 = game continues, -1 = dealer win, 1 = player win
-        if (player > 21 && dealer < 21){
+        int status = 0; //0 = game continues, -1 = dealer win, 1 = player win, 2 = tie
+        if (player == 21 && dealer == 21){
+            status = 2;
+        }
+        if (player > 21 && dealer > 21){
+            status = 2;
+        }
+        else if (player > 21 && dealer < 21){
             status = -1;
         }
         else if (dealer > 21 && player < 21) {
