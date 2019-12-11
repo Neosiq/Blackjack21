@@ -8,10 +8,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import static android.widget.Toast.LENGTH_SHORT;
 
 public class GameFragment extends Fragment {
 
@@ -31,7 +34,13 @@ public class GameFragment extends Fragment {
     // buttons: hit and stand
     private Button hit;
     private Button stand;
+
+    private int playerSum;
+    private int dealerSum;
+    private int hitTime;
     public static final String POINTS = "points";
+    public static final int BACK = 14;
+
 
 
 
@@ -43,25 +52,77 @@ public class GameFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_game, container, false);
         wireWidgets(rootView);
+        setListeners();
         gameStart();
         return rootView;
     }
 
     private void gameStart() {
+        playerSum = 0;
+        dealerSum = 0;
+        hitTime = 0;
         int dealer1 = (int) (Math.random()*13 + 1);
         int dealer2 = (int) (Math.random()*13 + 1);
         int player1 = (int) (Math.random()*13 + 1);
         int player2 = (int) (Math.random()*13 + 1);
+        playerSum = player1 + player2;
+        dealerSum = dealer1 + dealer2;
         setCard(pcard1, player1);
         setCard(pcard2, player2);
-
     }
 
-    private void hit() {
+    private void setListeners() {
+        hit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               if (hitTime == 0) {
+                   hitTime++;
+                   int player3 = (int) (Math.random() * 13 + 1);
+                   playerSum += player3;
+                   setCard(pcard3, player3);
+                   pcard3.setVisibility(View.VISIBLE);
+                   int dealer3 = (int) (Math.random() * 13 + 1);
+                   dealerSum += dealer3;
+                   setCard(dcard3, dealer3);
 
-    }
-    private void stand() {
+                   if (hitCheck(dealerSum, playerSum) == -1 ) {
+                       Toast.makeText(GameFragment.this.getContext(), "You have lost", LENGTH_SHORT ).show();
+                       dcard3.setVisibility(View.VISIBLE);
+                   }
+                   if (hitCheck(dealerSum, playerSum) == 1) {
+                       Toast.makeText(GameFragment.this.getContext(), "You have won", LENGTH_SHORT ).show();
+                       dcard3.setVisibility(View.VISIBLE);
+                   }
 
+               }
+               else {
+                   int player4 = (int) (Math.random() * 13 + 1);
+                   playerSum += player4;
+                   setCard(pcard4, player4);
+                   pcard4.setVisibility(View.VISIBLE);
+                   int dealer4 = (int) (Math.random() * 13 + 1);
+                   dealerSum += dealer4;
+                   setCard(dcard4, dealer4);
+                   hitCheck(dealerSum, playerSum);
+                   if (hitCheck(dealerSum, playerSum) == -1 ) {
+                       Toast.makeText(GameFragment.this.getContext(), "You have lost", LENGTH_SHORT ).show();
+                       dcard3.setVisibility(View.VISIBLE);
+                       dcard4.setVisibility(View.VISIBLE);
+                   }
+                   if (hitCheck(dealerSum, playerSum) == 1) {
+                       Toast.makeText(GameFragment.this.getContext(), "You have won", LENGTH_SHORT ).show();
+                       dcard3.setVisibility(View.VISIBLE);
+                       dcard4.setVisibility(View.VISIBLE);
+                   }
+               }
+            }
+        });
+        stand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     private void wireWidgets (View rootView) {
@@ -79,7 +140,7 @@ public class GameFragment extends Fragment {
         stand = rootView.findViewById(R.id.game_fragment_stand);
     }
 
-    private int checkWin(int dealer, int player) {
+    private int standCheck(int dealer, int player) {
         int status = 0; //0 = game continues, -1 = dealer win, 1 = player win
         if (player > 21 && dealer < 21){
             status = -1;
@@ -98,6 +159,23 @@ public class GameFragment extends Fragment {
         }
         else if (21 - player < 21 - dealer) {
             status = -1;
+        }
+        return status;
+    }
+
+    private int hitCheck(int dealer, int player) {
+        int status = 0; //0 = game continues, -1 = dealer win, 1 = player win
+        if (player > 21 && dealer < 21){
+            status = -1;
+        }
+        else if (dealer > 21 && player < 21) {
+            status = 1;
+        }
+        else if (dealer == 21 && player != 21) {
+            status = -1;
+        }
+        else if (player == 21 && dealer != 21) {
+            status = 1;
         }
         return status;
     }
@@ -129,6 +207,8 @@ public class GameFragment extends Fragment {
             card.setImageResource(R.drawable.spadequeen);
         if (value == 13)
             card.setImageResource(R.drawable.spadeking);
+        if (value == BACK)
+            card.setImageResource(R.drawable.cardback);
     }
 
 
