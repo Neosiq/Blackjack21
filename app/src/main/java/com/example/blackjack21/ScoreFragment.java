@@ -13,8 +13,11 @@ import androidx.fragment.app.Fragment;
 
 import com.example.blackjack21.R;
 
+import static com.example.blackjack21.GameFragment.GAMED;
+
 public class ScoreFragment extends Fragment {
 
+    private static final String POINTS = "points";
     private TextView scoreText;
     private int scoreEarned;
     private int score;
@@ -27,19 +30,16 @@ public class ScoreFragment extends Fragment {
 
 
         View rootView = inflater.inflate(R.layout.fragment_score, container, false);
-
         wireWidgets(rootView);
+        winCalculation();
         return rootView;
     }
 
-    private void winCalculation(boolean status){
-        Intent lastIntent = getActivity().getIntent();
-
-        scoreEarned = lastIntent.getIntExtra(GameFragment.POINTS, 0);
-        score += scoreEarned;
-        scoreText.setText("Score: " + score);
-
-
+    private void winCalculation(){
+        if (getArguments() != null)
+            scoreEarned = this.getArguments().getInt(POINTS);
+            score += scoreEarned;
+            scoreText.setText("Score: " + score);
     }
 
     private void wireWidgets (View rootView) {

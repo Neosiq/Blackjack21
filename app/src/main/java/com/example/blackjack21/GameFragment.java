@@ -48,6 +48,7 @@ public class GameFragment extends Fragment {
     private int dealer2;
     private int dealer3;
     public static final String POINTS = "points";
+    public static final String GAMED = "gamed";
     public static final int BACK = 14;
 
 
@@ -340,6 +341,9 @@ public class GameFragment extends Fragment {
                 // getActivity().getSupportFragmentManager().beginTransaction()
                 fragment = new ScoreFragment();
                 FragmentManager fms = getActivity().getSupportFragmentManager();
+                Bundle bundle = new Bundle();
+                bundle.putInt(POINTS, scoreEarned);
+                fragment.setArguments(bundle);
                 if(fragment != null){
                     fms.beginTransaction().replace(R.id.container, fragment).commit();
                 }
