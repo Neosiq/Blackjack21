@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import static android.widget.Toast.LENGTH_LONG;
 
@@ -38,6 +39,7 @@ public class GameFragment extends Fragment {
     private int playerSum;
     private int dealerSum;
     private int hitTime;
+    private int scoreEarned;
     private Boolean standMore;
     private int dealer1;
     private int dealer2;
@@ -66,6 +68,7 @@ public class GameFragment extends Fragment {
         dealerSum = 0;
         hitTime = 0;
         standMore = true;
+        scoreEarned = 0;
         dealer1 = (int) (Math.random()*13 + 1);
         dealer2 = (int) (Math.random()*13 + 1);
         int player1 = (int) (Math.random()*13 + 1);
@@ -78,13 +81,16 @@ public class GameFragment extends Fragment {
             standMore = false;
             setCard(dcard1, dealer1);
             setCard(dcard2, dealer2);
+            gameEnd();
         }
         if (hitCheck(dealerSum, playerSum) == 1) {
             Toast.makeText(GameFragment.this.getContext(), "You have won, 1 point earned", LENGTH_LONG ).show();
+            scoreEarned = 1;
             hitTime = -1;
             standMore = false;
             setCard(dcard1, dealer1);
             setCard(dcard2, dealer2);
+            gameEnd();
         }
         if (hitCheck(dealerSum, playerSum) == 2) {
             Toast.makeText(GameFragment.this.getContext(), "It's a tie, 0 points earned", LENGTH_LONG ).show();
@@ -92,6 +98,7 @@ public class GameFragment extends Fragment {
             standMore = false;
             setCard(dcard1, dealer1);
             setCard(dcard2, dealer2);
+            gameEnd();
         }
         setCard(pcard1, player1);
         setCard(pcard2, player2);
@@ -117,14 +124,17 @@ public class GameFragment extends Fragment {
                        setCard(dcard1, dealer1);
                        setCard(dcard2, dealer2);
                        setCard(dcard3, dealer3);
+                       gameEnd();
                    }
                    if (hitCheck(dealerSum, playerSum) == 1) {
                        Toast.makeText(GameFragment.this.getContext(), "You have won, 1 point earned", LENGTH_LONG ).show();
+                       scoreEarned = 1;
                        hitTime = -1;
                        standMore = false;
                        setCard(dcard1, dealer1);
                        setCard(dcard2, dealer2);
                        setCard(dcard3, dealer3);
+                       gameEnd();
                    }
                    if (hitCheck(dealerSum, playerSum) == 2) {
                        Toast.makeText(GameFragment.this.getContext(), "It's a tie, 0 points earned", LENGTH_LONG ).show();
@@ -133,6 +143,7 @@ public class GameFragment extends Fragment {
                        setCard(dcard1, dealer1);
                        setCard(dcard2, dealer2);
                        setCard(dcard3, dealer3);
+                       gameEnd();
                    }
 
                }
@@ -153,15 +164,18 @@ public class GameFragment extends Fragment {
                        setCard(dcard2, dealer2);
                        setCard(dcard3, dealer3);
                        setCard(dcard4, dealer4);
+                       gameEnd();
                    }
                    if (standCheck(dealerSum, playerSum) == 1) {
                        Toast.makeText(GameFragment.this.getContext(), "You have won, 1 point earned", LENGTH_LONG ).show();
+                       scoreEarned = 1;
                        hitTime = -1;
                        standMore = false;
                        setCard(dcard1, dealer1);
                        setCard(dcard2, dealer2);
                        setCard(dcard3, dealer3);
                        setCard(dcard4, dealer4);
+                       gameEnd();
                    }
                    if (standCheck(dealerSum, playerSum) == 0) {
                        Toast.makeText(GameFragment.this.getContext(), "It's a tie, 0 points earned", LENGTH_LONG ).show();
@@ -171,6 +185,7 @@ public class GameFragment extends Fragment {
                        setCard(dcard2, dealer2);
                        setCard(dcard3, dealer3);
                        setCard(dcard4, dealer4);
+                       gameEnd();
                    }
                }
             }
@@ -186,14 +201,17 @@ public class GameFragment extends Fragment {
                         setCard(dcard1, dealer1);
                         setCard(dcard2, dealer2);
                         setCard(dcard3, dealer3);
+                        gameEnd();
                     }
                     if (standCheck(dealerSum, playerSum) == 1) {
                         Toast.makeText(GameFragment.this.getContext(), "You have won, 1 point earned", LENGTH_LONG).show();
+                        scoreEarned = 1;
                         hitTime = -1;
                         standMore = false;
                         setCard(dcard1, dealer1);
                         setCard(dcard2, dealer2);
                         setCard(dcard3, dealer3);
+                        gameEnd();
                     }
                     if (standCheck(dealerSum, playerSum) == 0) {
                         Toast.makeText(GameFragment.this.getContext(), "It's a tie, 0 points earned", LENGTH_LONG).show();
@@ -202,6 +220,7 @@ public class GameFragment extends Fragment {
                         setCard(dcard1, dealer1);
                         setCard(dcard2, dealer2);
                         setCard(dcard3, dealer3);
+                        gameEnd();
                     }
                 }
             }
@@ -309,5 +328,14 @@ public class GameFragment extends Fragment {
             card.setImageResource(R.drawable.cardback);
     }
 
+    private void gameEnd() {
+        Fragment fragment = null;
+        // getActivity().getSupportFragmentManager().beginTransaction()
+        fragment = new ScoreFragment();
+        FragmentManager fms = getActivity().getSupportFragmentManager();
+        if(fragment != null){
+            fms.beginTransaction().replace(R.id.container, fragment).commit();
+        }
+    }
 
 }

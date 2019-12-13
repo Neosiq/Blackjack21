@@ -1,5 +1,6 @@
 package com.example.blackjack21;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,9 @@ import com.example.blackjack21.R;
 
 public class ScoreFragment extends Fragment {
 
-    private TextView score;
+    private TextView scoreText;
+    private int scoreEarned;
+    private int score;
 
 
 
@@ -30,9 +33,14 @@ public class ScoreFragment extends Fragment {
     }
 
     private void winCalculation(boolean status){
+        Intent lastIntent = getActivity().getIntent();
+
+        scoreEarned = lastIntent.getIntExtra(GameFragment.POINTS, 0);
+        score += scoreEarned;
+        scoreText.setText(String.valueOf(score));
     }
 
     private void wireWidgets (View rootView) {
-        score = rootView.findViewById(R.id.game_fragment_textview);
+        scoreText = rootView.findViewById(R.id.game_fragment_textview);
     }
 }
