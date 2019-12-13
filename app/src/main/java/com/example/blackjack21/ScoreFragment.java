@@ -37,7 +37,9 @@ public class ScoreFragment extends Fragment {
 
         scoreEarned = lastIntent.getIntExtra(GameFragment.POINTS, 0);
         score += scoreEarned;
-        scoreText.setText(String.valueOf(score));
+        scoreText.setText("Score: " + score);
+
+
     }
 
     private void wireWidgets (View rootView) {

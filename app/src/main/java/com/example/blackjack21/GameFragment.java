@@ -1,7 +1,8 @@
 package com.example.blackjack21;
 
-import android.content.Intent;
+
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +11,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
 
 import static android.widget.Toast.LENGTH_LONG;
 
@@ -245,7 +248,7 @@ public class GameFragment extends Fragment {
 
     //checks for all card conditions: 21, busting (more than 21), and having less than the opponent
     private int standCheck(int dealer, int player) {
-        int status = 0; //0 = game continues, -1 = dealer win, 1 = player win
+        int status = 0; //0 = tie, -1 = dealer win, 1 = player win
         if (player > 21 && dealer < 21){
             status = -1;
         }
@@ -329,13 +332,20 @@ public class GameFragment extends Fragment {
     }
 
     private void gameEnd() {
-        Fragment fragment = null;
-        // getActivity().getSupportFragmentManager().beginTransaction()
-        fragment = new ScoreFragment();
-        FragmentManager fms = getActivity().getSupportFragmentManager();
-        if(fragment != null){
-            fms.beginTransaction().replace(R.id.container, fragment).commit();
-        }
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Fragment fragment = null;
+                // getActivity().getSupportFragmentManager().beginTransaction()
+                fragment = new ScoreFragment();
+                FragmentManager fms = getActivity().getSupportFragmentManager();
+                if(fragment != null){
+                    fms.beginTransaction().replace(R.id.container, fragment).commit();
+                }
+            }
+        }, 5000);
+
     }
 
 }
