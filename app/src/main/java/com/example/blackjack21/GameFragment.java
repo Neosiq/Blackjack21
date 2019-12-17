@@ -333,10 +333,6 @@ public class GameFragment extends Fragment {
     }
 
     private void gameEnd() {
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
                 Fragment fragment = null;
                 // getActivity().getSupportFragmentManager().beginTransaction()
                 fragment = new ScoreFragment();
@@ -344,12 +340,9 @@ public class GameFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 bundle.putInt(POINTS, scoreEarned);
                 fragment.setArguments(bundle);
-                if(fragment != null){
-                    fms.beginTransaction().replace(R.id.container, fragment).commit();
-                }
-            }
-        }, 5000);
-
+//                if(fragment != null){
+//                    fms.beginTransaction().replace(R.id.container, fragment).commit();
+//                }   *Removed Code ( it directs us to the score fragment)
     }
 
 }
