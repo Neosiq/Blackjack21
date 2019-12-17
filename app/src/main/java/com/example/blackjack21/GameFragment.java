@@ -68,11 +68,13 @@ public class GameFragment extends Fragment {
     }
 
     private void gameStart() {
+        // sets values to 0 at the start of game
         playerSum = 0;
         dealerSum = 0;
         hitTime = 0;
         standMore = true;
         scoreEarned = 0;
+        // generates random card values
         dealer1 = (int) (Math.random()*13 + 1);
         dealer2 = (int) (Math.random()*13 + 1);
         int player1 = (int) (Math.random()*13 + 1);
@@ -109,6 +111,7 @@ public class GameFragment extends Fragment {
     }
 
     private void setListeners() {
+        // check for hit win conditions/loss conditions
         hit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -194,6 +197,7 @@ public class GameFragment extends Fragment {
                }
             }
         });
+        // checks for stand win conditions/loss conditions
         stand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -301,6 +305,7 @@ public class GameFragment extends Fragment {
         return status;
     }
 
+    // sets the card placeholder into a card image
     private void setCard(ImageView card, int value) {
         if (value == 1)
         card.setImageResource(R.drawable.spadeace);
@@ -342,7 +347,7 @@ public class GameFragment extends Fragment {
                 fragment.setArguments(bundle);
 //                if(fragment != null){
 //                    fms.beginTransaction().replace(R.id.container, fragment).commit();
-//                }   *Removed Code ( it directs us to the score fragment)
+//                }   *Removed Code (it directs us to the score fragment automatically)
     }
 
 }

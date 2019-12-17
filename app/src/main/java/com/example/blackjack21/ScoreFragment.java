@@ -28,7 +28,6 @@ public class ScoreFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-
         View rootView = inflater.inflate(R.layout.fragment_score, container, false);
         wireWidgets(rootView);
         winCalculation();
@@ -36,6 +35,7 @@ public class ScoreFragment extends Fragment {
     }
 
     private void winCalculation(){
+        // score goes here
         if (getArguments() != null)
             scoreEarned = this.getArguments().getInt(POINTS);
             score += scoreEarned;
