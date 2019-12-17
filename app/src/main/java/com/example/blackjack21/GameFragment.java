@@ -1,6 +1,8 @@
 package com.example.blackjack21;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -49,6 +51,7 @@ public class GameFragment extends Fragment {
     private int dealer3;
     public static final String POINTS = "points";
     public static final String GAMED = "gamed";
+    private static final String POINTSSAVED = "pointssaved";
     public static final int BACK = 14;
 
 
@@ -88,6 +91,7 @@ public class GameFragment extends Fragment {
             setCard(dcard1, dealer1);
             setCard(dcard2, dealer2);
             gameEnd();
+
         }
         if (hitCheck(dealerSum, playerSum) == 1) {
             Toast.makeText(GameFragment.this.getContext(), "You have won, 1 point earned", LENGTH_LONG ).show();
@@ -96,7 +100,7 @@ public class GameFragment extends Fragment {
             standMore = false;
             setCard(dcard1, dealer1);
             setCard(dcard2, dealer2);
-            gameEnd();
+            gameWon();
         }
         if (hitCheck(dealerSum, playerSum) == 2) {
             Toast.makeText(GameFragment.this.getContext(), "It's a tie, 0 points earned", LENGTH_LONG ).show();
@@ -132,6 +136,7 @@ public class GameFragment extends Fragment {
                        setCard(dcard2, dealer2);
                        setCard(dcard3, dealer3);
                        gameEnd();
+
                    }
                    if (hitCheck(dealerSum, playerSum) == 1) {
                        Toast.makeText(GameFragment.this.getContext(), "You have won, 1 point earned", LENGTH_LONG ).show();
@@ -141,7 +146,7 @@ public class GameFragment extends Fragment {
                        setCard(dcard1, dealer1);
                        setCard(dcard2, dealer2);
                        setCard(dcard3, dealer3);
-                       gameEnd();
+                       gameWon();
                    }
                    if (hitCheck(dealerSum, playerSum) == 2) {
                        Toast.makeText(GameFragment.this.getContext(), "It's a tie, 0 points earned", LENGTH_LONG ).show();
@@ -151,6 +156,7 @@ public class GameFragment extends Fragment {
                        setCard(dcard2, dealer2);
                        setCard(dcard3, dealer3);
                        gameEnd();
+
                    }
 
                }
@@ -172,6 +178,7 @@ public class GameFragment extends Fragment {
                        setCard(dcard3, dealer3);
                        setCard(dcard4, dealer4);
                        gameEnd();
+
                    }
                    if (standCheck(dealerSum, playerSum) == 1) {
                        Toast.makeText(GameFragment.this.getContext(), "You have won, 1 point earned", LENGTH_LONG ).show();
@@ -182,7 +189,7 @@ public class GameFragment extends Fragment {
                        setCard(dcard2, dealer2);
                        setCard(dcard3, dealer3);
                        setCard(dcard4, dealer4);
-                       gameEnd();
+                       gameWon();
                    }
                    if (standCheck(dealerSum, playerSum) == 0) {
                        Toast.makeText(GameFragment.this.getContext(), "It's a tie, 0 points earned", LENGTH_LONG ).show();
@@ -193,6 +200,7 @@ public class GameFragment extends Fragment {
                        setCard(dcard3, dealer3);
                        setCard(dcard4, dealer4);
                        gameEnd();
+
                    }
                }
             }
@@ -219,7 +227,7 @@ public class GameFragment extends Fragment {
                         setCard(dcard1, dealer1);
                         setCard(dcard2, dealer2);
                         setCard(dcard3, dealer3);
-                        gameEnd();
+                        gameWon();
                     }
                     if (standCheck(dealerSum, playerSum) == 0) {
                         Toast.makeText(GameFragment.this.getContext(), "It's a tie, 0 points earned", LENGTH_LONG).show();
@@ -229,6 +237,7 @@ public class GameFragment extends Fragment {
                         setCard(dcard2, dealer2);
                         setCard(dcard3, dealer3);
                         gameEnd();
+
                     }
                 }
             }
@@ -337,17 +346,19 @@ public class GameFragment extends Fragment {
             card.setImageResource(R.drawable.cardback);
     }
 
+    private void gameWon() {
+        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt(POINTSSAVED, scoreEarned);
+        editor.commit();
+    }
+
     private void gameEnd() {
-                Fragment fragment = null;
-                // getActivity().getSupportFragmentManager().beginTransaction()
-                fragment = new ScoreFragment();
-                FragmentManager fms = getActivity().getSupportFragmentManager();
-                Bundle bundle = new Bundle();
-                bundle.putInt(POINTS, scoreEarned);
-                fragment.setArguments(bundle);
-//                if(fragment != null){
-//                    fms.beginTransaction().replace(R.id.container, fragment).commit();
-//                }   *Removed Code (it directs us to the score fragment automatically)
+        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        scoreEarned = 0;
+        editor.putInt(POINTSSAVED, scoreEarned);
+        editor.commit();
     }
 
 }
