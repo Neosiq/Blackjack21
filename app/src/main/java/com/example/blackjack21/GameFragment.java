@@ -95,7 +95,7 @@ public class GameFragment extends Fragment {
         }
         if (hitCheck(dealerSum, playerSum) == 1) {
             Toast.makeText(GameFragment.this.getContext(), "You have won, 1 point earned", LENGTH_LONG ).show();
-            scoreEarned = 1;
+            scoreEarned += 1;
             hitTime = -1;
             standMore = false;
             setCard(dcard1, dealer1);
@@ -140,7 +140,7 @@ public class GameFragment extends Fragment {
                    }
                    if (hitCheck(dealerSum, playerSum) == 1) {
                        Toast.makeText(GameFragment.this.getContext(), "You have won, 1 point earned", LENGTH_LONG ).show();
-                       scoreEarned = 1;
+                       scoreEarned += 1;
                        hitTime = -1;
                        standMore = false;
                        setCard(dcard1, dealer1);
@@ -182,7 +182,7 @@ public class GameFragment extends Fragment {
                    }
                    if (standCheck(dealerSum, playerSum) == 1) {
                        Toast.makeText(GameFragment.this.getContext(), "You have won, 1 point earned", LENGTH_LONG ).show();
-                       scoreEarned = 1;
+                       scoreEarned += 1;
                        hitTime = -1;
                        standMore = false;
                        setCard(dcard1, dealer1);
@@ -221,7 +221,7 @@ public class GameFragment extends Fragment {
                     }
                     if (standCheck(dealerSum, playerSum) == 1) {
                         Toast.makeText(GameFragment.this.getContext(), "You have won, 1 point earned", LENGTH_LONG).show();
-                        scoreEarned = 1;
+                        scoreEarned += 1;
                         hitTime = -1;
                         standMore = false;
                         setCard(dcard1, dealer1);
@@ -359,6 +359,7 @@ public class GameFragment extends Fragment {
         scoreEarned = 0;
         editor.putInt(POINTSSAVED, scoreEarned);
         editor.commit();
+
     }
 
 }
